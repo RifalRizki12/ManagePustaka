@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,12 @@ namespace ManagePustaka
 
         public void AddMember(Member member)
         {
+            if (Handler.IsNullOrEmpty(member.Email) || Handler.IsNullOrEmpty(member.Name) || Handler.IsNullOrEmpty(member.MembershipNumber))
+            {
+                Console.WriteLine("inputan tidak boleh kosong.");
+                return;
+            }
+
             member.Id = members.Count + 1;
             members.Add(member);
             Console.WriteLine("Anggota berhasil ditambahkan.");
@@ -25,6 +32,12 @@ namespace ManagePustaka
         public void EditMember(int id, Member updatedMember)
         {
             var existingMember = members.Find(m => m.Id == id);
+
+            if (Handler.IsNullOrEmpty(updatedMember.Email) || Handler.IsNullOrEmpty(updatedMember.Name) || Handler.IsNullOrEmpty(updatedMember.MembershipNumber))
+            {
+                Console.WriteLine("inputan tidak boleh kosong.");
+                return;
+            }
             if (existingMember != null)
             {
                 existingMember.Name = updatedMember.Name;

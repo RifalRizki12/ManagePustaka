@@ -7,6 +7,7 @@ class Program
     static BookService bookService = new BookService();
     static MembersService memberService = new MembersService();
     static LoanService loanService = new LoanService(bookService);
+    static Handler handler = new Handler();
     public static void Main(string[] args)
     {
         // Tambahkan data dummy buku
@@ -33,7 +34,8 @@ class Program
             Console.WriteLine("0. Keluar");
             Console.Write("Pilih 0-3 : ");
 
-            string choice = Console.ReadLine();
+            string choice = handler.ValidateInput("Pilihan menu tidak boleh kosong. Silakan coba lagi.", s => !string.IsNullOrWhiteSpace(s));
+
             switch (choice)
             {
                 case "1":
@@ -66,7 +68,7 @@ class Program
             Console.WriteLine("0. Keluar");
             Console.Write("Pilih 0-4 : ");
 
-            string choice = Console.ReadLine();
+            string choice = handler.ValidateInput("Pilihan menu tidak boleh kosong. Silakan coba lagi.", s => !string.IsNullOrWhiteSpace(s));
 
             switch (choice)
             {
